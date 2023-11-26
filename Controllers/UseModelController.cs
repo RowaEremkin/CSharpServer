@@ -17,10 +17,8 @@ namespace CSharpServer.Controllers
             {
                 SklearnPredictorWrapper predictor = new SklearnPredictorWrapper(modelPath);
 
-                // Пример данных для предсказания (замените на ваши реальные данные)
                 List<float> inputData = new List<float> { 1f, 2f, 3f };
 
-                // Вызов функции предсказания
                 dynamic prediction = predictor.Predict(inputData);
                 return Ok("Успешно!");
             }

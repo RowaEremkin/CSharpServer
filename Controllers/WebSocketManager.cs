@@ -43,9 +43,8 @@ public class WebSocketManager
                     var message = Encoding.UTF8.GetString(buffer, 0, result.Count);
                     Console.WriteLine($"Received message: {message}");
 
-                    // Обработка полученного сообщения
 
-                    // Пример отправки обратно клиенту
+
                     var responseMessage = $"Server received: {message}";
                     var responseBuffer = new ArraySegment<byte>(Encoding.UTF8.GetBytes(responseMessage));
                     await webSocket.SendAsync(responseBuffer, WebSocketMessageType.Text, true, CancellationToken.None);
@@ -53,7 +52,6 @@ public class WebSocketManager
 
             } while (!result.CloseStatus.HasValue);
 
-            // Удаляем WebSocket из менеджера по завершении соединения
             await webSocketManager.RemoveSocket(connectionId);
 
         }
@@ -63,7 +61,6 @@ public class WebSocketManager
         }
         finally
         {
-            // убедитесь, что WebSocket удаляется из менеджера при закрытии
             webSocketManager.RemoveSocket(connectionId);
             await webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Connection closed", CancellationToken.None);
         }

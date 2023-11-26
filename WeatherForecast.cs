@@ -23,6 +23,11 @@ namespace CSharpServer
         public string ?Category { get; set; }
         public float Amount { get; set; }
     }
+    public class CheckModel
+    {
+        public int Id { get; set; }
+        public bool Check { get; set; }
+    }
     public class Transaction
     {
         public int Step { get; set; }

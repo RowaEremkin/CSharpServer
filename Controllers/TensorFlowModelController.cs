@@ -49,12 +49,11 @@ namespace CSharpServer.Controllers
         }
         static List<float[]> ReadCSV()
         {
-            // Чтение данных из CSV-файла
             var records = new List<float[]>();
             var labels = new List<float>();
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
-                MissingFieldFound = null // Устанавливаем MissingFieldFound в null
+                MissingFieldFound = null
             };
             using (var reader = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + "/fraud_dataset.csv"))
             using (var csv = new CsvReader(reader, config))
@@ -109,22 +108,16 @@ namespace CSharpServer.Controllers
     {
         static float[][] OneHotEncode(string[] categories)
         {
-            // Получаем уникальные значения категорий
             var uniqueCategories = categories.Distinct().ToArray();
 
-            // Создаем пустой двумерный массив для one-hot encoding
             float[][] encodedData = new float[categories.Length][];
 
-            // Проходим по каждой категории и преобразуем вектор в one-hot encoding
             for (int i = 0; i < categories.Length; i++)
             {
-                // Инициализируем вектор нулями
                 encodedData[i] = new float[uniqueCategories.Length];
 
-                // Находим индекс текущей категории
                 int categoryIndex = Array.IndexOf(uniqueCategories, categories[i]);
 
-                // Устанавливаем значение 1 в соответствующем индексе
                 encodedData[i][categoryIndex] = 1.0f;
             }
 
